@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Depoimentos</title>
+</head>
+<body>
+    <h1>Depoimentos de Estudantes</h1>
+
+    <!-- Formulário para enviar depoimento -->
+    <form action="/enviar_depoimento" method="POST">
+        <input type="text" name="nome" placeholder="Seu nome" required><br>
+        <textarea name="texto" placeholder="Escreva seu depoimento" required></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <hr>
+
+    <!-- Lista de depoimentos -->
+    {% for depoimento in depoimentos %}
+        <div>
+            <h3>{{ depoimento.nome }}</h3>
+            <p>{{ depoimento.texto }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

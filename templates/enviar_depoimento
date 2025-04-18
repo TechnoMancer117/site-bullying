@@ -1,0 +1,27 @@
+from flask import Flask, render_template, request, redirect
+
+app = Flask(__name__)
+
+# Lista para armazenar os depoimentos temporariamente
+depoimentos = []
+
+@app.route('/')
+def pagina_principal():
+    return render_template('index.html')
+
+@app.route('/sobre')
+def pagina_sobre():
+    return render_template('sobre.html')
+
+@app.route('/depoimentos')
+def pagina_depoimentos():
+    return render_template('depoimentos.html', depoimentos=depoimentos)
+
+# Nova rota para receber o POST do formulário
+@app.route('/enviar_depoimento', methods=['POST'])
+def enviar_depoimento():
+    nome = request.form['nome']
+    texto = request.form['texto']
+    novo_depoimento = {'nome': nome, 'texto': texto}
+    depoimentos.append(novo_depoimento)
+    return redirect('/depoimentos')
